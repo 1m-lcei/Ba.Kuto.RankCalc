@@ -1,0 +1,28 @@
+{
+  "tools": [
+    {
+      "schema": {
+        "name": "calculate_ba_rank_route",
+        "description": "ブルーアーカイブの戦術対抗戦における、指定した順位からのルートを計算します。",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "rank": {
+              "type": "integer",
+              "description": "計算を開始する現在の順位"
+            },
+            "strategy": {
+              "type": "string",
+              "description": "ルート計算の戦略。'optimal' (最効率), 'compromise' (妥協), または 'max_battles' (最多対戦回数) を指定します。省略された場合は、optimalとcompromiseの両方を提案します。",
+              "enum": ["optimal", "compromise", "max_battles"]
+            }
+          },
+          "required": ["rank"]
+        }
+      },
+      "command": {
+        "command": "dotnet run --project src/Ba.Kuto.RankCalc -- {{params.rank}} {{params.strategy}}"
+      }
+    }
+  ]
+}

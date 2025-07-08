@@ -1,0 +1,14 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".gitignore" />
+    <File Path="gemini-tools.json" />
+    <File Path="GEMINI.md" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Ba.Kuto.RankCalc/Ba.Kuto.RankCalc.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Ba.Kuto.RankCalc.Tests/Ba.Kuto.RankCalc.Tests.csproj" />
+  </Folder>
+</Solution>
