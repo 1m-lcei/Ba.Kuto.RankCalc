@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/Solution Items/">
+    <File Path=".gitattributes" />
     <File Path=".gitignore" />
     <File Path="gemini-tools.json" />
     <File Path="GEMINI.md" />
@@ -10,5 +11,8 @@
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/Ba.Kuto.RankCalc.Tests/Ba.Kuto.RankCalc.Tests.csproj" />
+  </Folder>
+  <Folder Name="/images/">
+    <File Path="images/image.png" />
   </Folder>
 </Solution>
