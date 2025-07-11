@@ -5,6 +5,7 @@
     <File Path="gemini-tools.json" />
     <File Path="GEMINI.md" />
     <File Path="README.md" />
+    <File Path="setup.js" />
   </Folder>
   <Folder Name="/src/">
     <Project Path="src/Ba.Kuto.RankCalc/Ba.Kuto.RankCalc.csproj" />
