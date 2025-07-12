@@ -33,6 +33,8 @@
 ### c. 開発プロセス
 
 *   **テスト駆動開発 (TDD):** 新しい機能やロジックを追加する際は、まずテストを記述し、そのテストがパスするように実装を進めます。
+*   **MCPサーバーの実際の挙動確認**: MCPサーバーの実際の挙動確認は、`MCP Inspector` を用いて行います。その際、以下のコマンドをシェル実行してください。
+    *   `pnpm dlx @modelcontextprotocol/inspector dotnet run --project src/Ba.Kuto.RankCalc/Ba.Kuto.RankCalc.csproj`
 
 ## 3. 『ブルーアーカイブ』のコンテンツに関する知識
 

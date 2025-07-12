@@ -17,8 +17,12 @@ public static class RootCalculationTools
         List<int> Route
         );
 
-    [McpServerTool, Description("指定された順位からの最効率の（Optimal な）ルート、及び、対戦回数の変わらない範囲で妥協できる（Compromise な）ルートを計算します。特に戦略の指定がない場合は、これら両方を提示します。")]
-    public static Result[] CalculateRoutes([Description("開始順位")] int rank)
+    public readonly record struct BiStrategyResult(
+        Result OptimalResult,
+        Result? CompromiseResult);
+
+    [McpServerTool(UseStructuredContent = true), Description("指定された順位からの最効率のルート、及び、対戦回数の変わらない範囲で妥協できるルートを計算します。妥協ルートは、最効率ルートと異なる場合のみ設定されます。特に戦略の指定がない場合は、この方法でルートを提示します。")]
+    public static BiStrategyResult CalculateRoutes([Description("開始順位")] int rank)
     {
         var optimalRoute = RankCalculator.CalculateOptimalRoute(rank);
         var compromiseRoute = RankCalculator.CalculateCompromiseRoute(rank, optimalRoute);
@@ -29,17 +33,19 @@ public static class RootCalculationTools
             BattleCount = optimalRoute.Count - 1,
             Route = optimalRoute
         };
-        var compromiseResult = new Result()
-        {
-            Strategy = Strategy.Compromise.ToString(),
-            BattleCount = compromiseRoute.Count - 1,
-            Route = compromiseRoute
-        };
+        Result? compromiseResult = compromiseRoute.SequenceEqual(optimalRoute)
+            ? null
+            : new Result()
+            {
+                Strategy = Strategy.Compromise.ToString(),
+                BattleCount = compromiseRoute.Count - 1,
+                Route = compromiseRoute
+            };
 
-        return [optimalResult, compromiseResult];
+        return new(optimalResult, compromiseResult);
     }
 
-    [McpServerTool, Description("指定された順位からの最効率の（Optimal な）ルートを計算します。")]
+    [McpServerTool(UseStructuredContent = true), Description("指定された順位からの最効率のルートを計算します。")]
     public static Result CalculateOptimalRoute([Description("開始順位")] int rank)
     {
         var route = RankCalculator.CalculateOptimalRoute(rank);
@@ -52,7 +58,7 @@ public static class RootCalculationTools
         };
     }
 
-    [McpServerTool, Description("指定された順位からの対戦回数の変わらない範囲で妥協できる（Compromise な）ルートを計算します。")]
+    [McpServerTool(UseStructuredContent = true), Description("指定された順位からの対戦回数の変わらない範囲で妥協できるルートを計算します。")]
     public static Result CalculateCompromiseRoute([Description("開始順位")] int rank)
     {
         var route = RankCalculator.CalculateCompromiseRoute(rank);
@@ -65,7 +71,7 @@ public static class RootCalculationTools
         };
     }
 
-    [McpServerTool, Description("指定された順位からの最多対戦回数となる（MaxBattles な）ルートを計算します。")]
+    [McpServerTool(UseStructuredContent = true), Description("指定された順位からの最多対戦回数となるルートを計算します。")]
     public static Result CalculateMaxBattleRoute([Description("開始順位")] int rank)
     {
         var route = RankCalculator.CalculateMaxBattleRoute(rank);
